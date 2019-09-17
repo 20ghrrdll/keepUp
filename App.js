@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+
 import ContactList from './assets/components/ContactList';
+import AddContactButton from './assets/components/AddContactButton';
 import testData from './assets/testData';
 
 export default function App() {
@@ -8,6 +10,7 @@ export default function App() {
     <View style={styles.container}>
      <Text style={styles.title}>KeepUp</Text>
       <ContactList contacts={testData}/>
+      <AddContactButton/>
     </View>
   );
 }

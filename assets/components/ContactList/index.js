@@ -52,6 +52,8 @@ class ContactList extends Component {
     this.setState({overdues, warmConnects});
   }
 
+  keyExtractor = (item, index) => item.name + String(index)
+
   componentDidMount(){
     this.determineOverdues();
   }
@@ -78,8 +80,8 @@ class ContactList extends Component {
           ]}
           renderItem={ ({ item }) => <ContactListItem name={item.name} lastContacted={item.lastContacted}/>}
           renderSectionHeader={({ section: { title } }) => this.renderSectionTitle(title)}
-        >
-        </SectionList>
+          keyExtractor={this.keyExtractor}
+        />
       </View>
     );
   }
