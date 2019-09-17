@@ -1,27 +1,17 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
-import ContactList from './assets/components/ContactList';
-import AddContactButton from './assets/components/AddContactButton';
-import testData from './assets/testData';
+import HomeScreen from './assets/screens/HomeScreen.js'
+import AddContactScreen from './assets/screens/AddContactScreen.js'
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-     <Text style={styles.title}>KeepUp</Text>
-      <ContactList contacts={testData}/>
-      <AddContactButton/>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    marginTop: 40,
+const MainNavigator = createStackNavigator(
+  {
+    Home: {screen: HomeScreen},
+    AddContact: {screen: AddContactScreen},
   },
-  title: {
-    fontSize: 36,
-  },
-});
+  {
+    initialRouteName: 'Home',
+  }
+);
+
+export default createAppContainer(MainNavigator);

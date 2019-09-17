@@ -3,7 +3,7 @@ import { Text, TouchableOpacity } from 'react-native';
 import styles from './styles'
 
 class AddContactButton extends Component {
-  onPress = () => console.log('hello')
+  onPress = () => this.props.onAddContact()
 
   render() {
     return (
