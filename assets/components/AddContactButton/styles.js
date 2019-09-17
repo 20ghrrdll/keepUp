@@ -8,7 +8,7 @@ export default styles = StyleSheet.create({
     height: SPACE_UNIT * 7,
     width: SPACE_UNIT * 7,
     borderRadius: SPACE_UNIT * 14,
-    backgroundColor: 'green',
+    backgroundColor: 'pink',
     position: 'absolute',
     alignSelf: 'flex-end',
     bottom: SPACE_UNIT * 3,

@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import styles from './styles'
 
 class AddContactButton extends Component {
+  onPress = () => console.log('hello')
+
   render() {
     return (
-      <View style={styles.circleButton}>
-        <Text>Add Contact</Text>
-      </View>
+      <TouchableOpacity style={styles.circleButton} onPress={this.onPress}>
+          <Text>Add Contact</Text>
+      </TouchableOpacity>
     )
   }
 }
