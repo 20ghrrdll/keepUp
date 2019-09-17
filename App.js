@@ -1,10 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import ContactList from './assets/components/ContactList';
+import testData from './assets/testData';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+     <Text style={styles.title}>KeepUp</Text>
+      <ContactList contacts={testData}/>
     </View>
   );
 }
@@ -13,7 +16,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: 40,
+  },
+  title: {
+    fontSize: 36,
   },
 });
