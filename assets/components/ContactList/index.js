@@ -12,8 +12,19 @@ class ContactList extends Component {
       warmConnects: [],
     }
 
-  compareContactWarmth = (a, b) => {
 
+  getDeadline(contact) {
+    const {lastContacted, contactFrequency, contactFrequencyUnits} = contact;
+    let contactDeadline = lastContacted.clone();
+
+    contactDeadline.add(contactFrequency, contactFrequencyUnits);
+    return contactDeadline;
+  }
+  compareContactWarmth = (a, b) => {
+    if (this.getDeadline(a).isBefore( this.getDeadline(b) )) {
+      return -1;
+    }
+    return 1;
   }
  
   determineOverdues = () => {
@@ -34,6 +45,9 @@ class ContactList extends Component {
         warmConnects.push(contact);
       }
     })
+
+    overdues.sort(this.compareContactWarmth)
+    warmConnects.sort(this.compareContactWarmth)
 
     this.setState({overdues, warmConnects});
   }
