@@ -9,8 +9,10 @@ import {
   Platform,
   TextInput,
   FlatList,
+  AsyncStorage
 } from 'react-native';
 import { SearchBar } from 'react-native-elements';
+
 import moment from "moment";
 import update from 'immutability-helper';
 
@@ -35,7 +37,23 @@ class AddContactScreen extends Component {
 
   };
 
-  addContact = () => this.props.navigation.navigate('Home');
+  addContact = async() => {
+    const {name, lastContacted, contactFrequency, contactFrequencyUnits} = this.state
+    const newContact = {
+      name,
+      lastContacted,
+      contactFrequency: Number(contactFrequency),
+      contactFrequencyUnits
+    }
+    const newContactKey = '@' + name + moment().format()
+    try {
+      await AsyncStorage.setItem(newContactKey, newContact)
+    } catch (e) {
+      console.log(e)
+    }
+
+    this.props.navigation.navigate('Home')
+  };
 
   updateContactSearch = contactSearch => {
     this.setState({contactSearch});
