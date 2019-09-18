@@ -112,36 +112,15 @@ class AddContactScreen extends Component {
     );
   }
 
-  keepUpInfoForm = () => {
-    return (
-      <View>
-        <Text>Stay in touch with...</Text>
-        <TextInput placeholder='name'/>
-        <Text>Last contacted on {this.state.lastContacted.format("MMMM Do, YYYY")} </Text>
-        <this.lastContactedDatePicker/>
-        <Button title={this.state.changeDate ? 'Confirm Date' : 'Change Date'} onPress={this.onChangeDate}/>
-        <Text>Get in touch every </Text>
-        <TextInput placeholder='1'/>
-        <this.contactFrequencyUnitsPicker/>
-        <this.contactMethodList/>
-      </View>
-    );
-  }
-
+  /*
   contactMediumPicker = (contactMedium, contactMethodIndex) => { 
     const {Item} = Picker
     return (
       <Picker
         selectedValue={this.state.contactMethods[contactMethodIndex].contactMedium}
         onValueChange={(mediumValue, mediumIndex) => {
-          console.log(mediumValue)
-          console.log(this.state.contactMethods[contactMethodIndex].contactMedium)
-          /*const currentContactMethods = this.state.contactMethods;
-          currentContactMethods[contactMethodIndex].contactMedium = mediumValue
-          console.log(currentContactMethods)*/
-          this.setState({
-            contactMethods: update(this.state.contactMethods, { contactMethodIndex: { contactMedium: { $set: mediumValue } } })
-          })
+          this.state.contactMethods[contactMethodIndex].contactMedium = mediumValue
+          this.forceUpdate()
         }}
       >
         <Item label='just text' value='just-text'/>
@@ -152,8 +131,6 @@ class AddContactScreen extends Component {
 
     );
   }
-
-
   
   contactMethod = ({item: { contactInfo, contactMedium }, index: contactMethodIndex }) => {
     return (
@@ -180,12 +157,28 @@ class AddContactScreen extends Component {
         />
       </View>
     );
+  }*/
+
+  //TODO: Add Contact methods. Right now the method selector cannot update list so think of creative ways to address this!
+  keepUpInfoForm = () => {
+    return (
+      <View>
+        <Text>Stay in touch with...</Text>
+        <TextInput placeholder='name'/>
+        <Text>Last contacted on {this.state.lastContacted.format("MMMM Do, YYYY")} </Text>
+        <this.lastContactedDatePicker/>
+        <Button title={this.state.changeDate ? 'Confirm Date' : 'Change Date'} onPress={this.onChangeDate}/>
+        <Text>Get in touch every </Text>
+        <TextInput placeholder='1'/>
+        <this.contactFrequencyUnitsPicker/>
+      </View>
+    );
   }
 
   render() {
+    // add back in <this.searchForContact/> once contact methods are ironed out :)
     return (
       <View style={appStyles.container}>
-        <this.searchForContact/>
         <this.keepUpInfoForm/>
         <Button
           onPress={this.addContact}
