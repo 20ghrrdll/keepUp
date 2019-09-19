@@ -86,7 +86,7 @@ class ContactList extends Component {
               data: this.state.warmConnects,
             },
           ]}
-          renderItem={ ({ item }) => <ContactListItem name={item.name} lastContacted={item.lastContacted}/>}
+          renderItem={ ({ item, index }) => <ContactListItem name={item.name} lastContacted={item.lastContacted} listIndex={index}/>}
           renderSectionHeader={({ section: { title } }) => this.renderSectionTitle(title)}
           keyExtractor={this.keyExtractor}
         />

@@ -9,10 +9,14 @@ const INITIAL_STATE = {
 const connectionsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'ADD_CONTACT':
-      const allContacts = state.allContacts.slice();
-      allContacts.push(action.payload)
-      return {...state, allContacts}
+      const updatedContacts = state.allContacts.slice();
+      updatedContacts.push(action.payload)
+      return {...state, allContacts: updated};
 
+    case 'DELETE_CONTACT':
+      const { allContacts } = state
+      const truncatedContacts = allContacts.slice(0,action.payload).concat(allContacts.slice(action.payload+1))
+      return {...state, allContacts: truncatedContacts}
     default:
       return state
   }
