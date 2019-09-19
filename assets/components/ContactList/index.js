@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { SectionList, View, Text } from 'react-native';
+import { connect } from 'react-redux';
 import moment from 'moment';
 
 import ContactListItem from '../ContactListItem';
@@ -9,6 +10,7 @@ class ContactList extends Component {
   state = {
       overdues: [],
       warmConnects: [],
+      loaded: false,
     }
 
 
@@ -29,10 +31,10 @@ class ContactList extends Component {
   determineOverdues = () => {
     const overdues = [];
     const warmConnects = [];
-    const { contacts } = this.props;
+    const { allContacts } = this.props;
     const today = moment();
 
-    contacts.map(( contact ) => {
+    allContacts.map(( contact ) => {
       const {lastContacted, contactFrequency, contactFrequencyUnits} = contact;
       let contactDeadline = lastContacted.clone();
   
@@ -54,8 +56,13 @@ class ContactList extends Component {
   keyExtractor = (item, index) => item.name + String(index)
 
   componentDidMount(){
-    console.log(this.props.contacts)
     this.determineOverdues();
+    this.setState({loaded: true})
+    
+  }
+
+  componentDidUpdate(prevProps){
+    if (this.state.loaded & prevProps.allContacts !== this.props.allContacts) this.determineOverdues();
   }
 
   renderSectionTitle(title){
@@ -65,6 +72,7 @@ class ContactList extends Component {
   }
   
   render(){
+
     return (
       <View>
         <SectionList
@@ -86,5 +94,9 @@ class ContactList extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  const { allContacts } = state.connections;
+  return { allContacts };
+}
 
-export default ContactList;
+export default connect(mapStateToProps)(ContactList);

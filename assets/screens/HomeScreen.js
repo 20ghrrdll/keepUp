@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Text, View, AsyncStorage } from 'react-native';
-import { connect } from 'react-redux';
 
 import ContactList from '../components/ContactList';
 import AddContactButton from '../components/AddContactButton';
@@ -47,21 +46,16 @@ class HomeScreen extends Component {
 
   onAddContact = () => this.props.navigation.navigate('AddContact')
   render() {
-    console.log(this.props.allContacts)
     return (
       <View style={appStyles.container}>
       <Text style={appStyles.title}>KeepUp</Text>
-        <ContactList contacts={this.props.allContacts}/>
+        <ContactList/>
         <AddContactButton onAddContact={this.onAddContact}/>
       </View>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log(state)
-  const { allContacts } = state.connections;
-  return { allContacts };
-}
 
-export default connect(mapStateToProps) (HomeScreen);
+
+export default HomeScreen;

@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
-import testData from './assets/testData.js'
+import testData from './testData.js'
+
 
 const INITIAL_STATE = {
   allContacts: testData,
@@ -7,6 +8,11 @@ const INITIAL_STATE = {
 
 const connectionsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case 'ADD_CONTACT':
+      const allContacts = state.allContacts.slice();
+      allContacts.push(action.payload)
+      return {...state, allContacts}
+
     default:
       return state
   }

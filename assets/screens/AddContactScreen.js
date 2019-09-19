@@ -12,9 +12,13 @@ import {
   AsyncStorage
 } from 'react-native';
 import { SearchBar } from 'react-native-elements';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import moment from "moment";
 import update from 'immutability-helper';
+
+import { addContact } from '../actions.js'
 
 import appStyles from '../appStyles.js'
 
@@ -37,7 +41,7 @@ class AddContactScreen extends Component {
 
   };
 
-  addContact = async() => {
+  onAddContact = async() => {
     const {name, lastContacted, contactFrequency, contactFrequencyUnits} = this.state
     const newContact = {
       name,
@@ -45,12 +49,8 @@ class AddContactScreen extends Component {
       contactFrequency: Number(contactFrequency),
       contactFrequencyUnits
     }
-    const newContactKey = '@' + name + moment().format()
-    try {
-      await AsyncStorage.setItem(newContactKey, JSON.stringify(newContact))
-    } catch (e) {
-      console.log(e)
-    }
+    
+    this.props.addContact(newContact);
 
     this.props.navigation.navigate('Home')
   };
@@ -203,7 +203,7 @@ class AddContactScreen extends Component {
       <View style={appStyles.container}>
         <this.keepUpInfoForm/>
         <Button
-          onPress={this.addContact}
+          onPress={this.onAddContact}
           title='Keep Up!'
         />
       </View>
@@ -211,4 +211,10 @@ class AddContactScreen extends Component {
   }
 }
 
-export default AddContactScreen;
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    addContact,
+  }, dispatch)
+);
+
+export default connect(null, mapDispatchToProps)(AddContactScreen);
