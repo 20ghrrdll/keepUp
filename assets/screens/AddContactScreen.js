@@ -47,7 +47,7 @@ class AddContactScreen extends Component {
     }
     const newContactKey = '@' + name + moment().format()
     try {
-      await AsyncStorage.setItem(newContactKey, newContact)
+      await AsyncStorage.setItem(newContactKey, JSON.stringify(newContact))
     } catch (e) {
       console.log(e)
     }
@@ -58,6 +58,8 @@ class AddContactScreen extends Component {
   updateContactSearch = contactSearch => {
     this.setState({contactSearch});
   }
+
+  onChangeName = name => this.setState({name})
 
   setLastContacted = lastContacted => {
     lastContacted = moment(lastContacted)
@@ -81,6 +83,8 @@ class AddContactScreen extends Component {
       }
     }
   }
+
+  onChangeContactFrequency = contactFrequency => this.setState({contactFrequency})
 
   onChangeContactFrequencyUnits = (itemValue, itemIndex) =>
   this.setState({contactFrequencyUnits: itemValue})
@@ -182,12 +186,12 @@ class AddContactScreen extends Component {
     return (
       <View>
         <Text>Stay in touch with...</Text>
-        <TextInput placeholder='name'/>
+        <TextInput placeholder='name' onChangeText={this.onChangeName}/>
         <Text>Last contacted on {this.state.lastContacted.format("MMMM Do, YYYY")} </Text>
         <this.lastContactedDatePicker/>
         <Button title={this.state.changeDate ? 'Confirm Date' : 'Change Date'} onPress={this.onChangeDate}/>
         <Text>Get in touch every </Text>
-        <TextInput placeholder='1'/>
+        <TextInput placeholder='1' onChangeText={this.onChangeContactFrequency}/>
         <this.contactFrequencyUnitsPicker/>
       </View>
     );

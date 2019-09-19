@@ -6,7 +6,6 @@ import ContactListItem from '../ContactListItem';
 
 
 class ContactList extends Component {
-
   state = {
       overdues: [],
       warmConnects: [],
@@ -55,6 +54,7 @@ class ContactList extends Component {
   keyExtractor = (item, index) => item.name + String(index)
 
   componentDidMount(){
+    console.log(this.props.contacts)
     this.determineOverdues();
   }
 
