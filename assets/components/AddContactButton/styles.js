@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { SPACE_UNIT } from '../../constants'
+import { SPACE_UNIT, ACTION_BUTTON_COLOR } from '../../constants'
 
 
 export default styles = StyleSheet.create({ 
@@ -8,10 +8,16 @@ export default styles = StyleSheet.create({
     height: SPACE_UNIT * 7,
     width: SPACE_UNIT * 7,
     borderRadius: SPACE_UNIT * 14,
-    backgroundColor: 'pink',
+    backgroundColor: ACTION_BUTTON_COLOR,
     position: 'absolute',
     alignSelf: 'flex-end',
     bottom: SPACE_UNIT * 3,
     right: SPACE_UNIT,
   },
+
+  plusIcon: {
+   marginLeft: 6,
+   marginTop: 6,
+  }
+
 })

@@ -12,5 +12,6 @@ export default styles = StyleSheet.create({
     backgroundColor: `powderblue`,
     marginBottom: SPACE_UNIT,
     padding: SPACE_UNIT,
+    flex: 1
   }
 })

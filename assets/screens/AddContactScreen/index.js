@@ -18,9 +18,10 @@ import { bindActionCreators } from 'redux';
 import moment from "moment";
 import update from 'immutability-helper';
 
-import { addContact } from '../actions.js'
+import { addContact } from '../../actions.js'
 
-import appStyles from '../appStyles.js'
+import appStyles from '../../appStyles.js'
+import styles from './styles.js'
 
 
 class AddContactScreen extends Component {
@@ -125,6 +126,8 @@ class AddContactScreen extends Component {
       <Picker
         selectedValue={this.state.contactFrequencyUnits}
         onValueChange={this.onChangeContactFrequencyUnits}
+        style={styles.contactFrequencyUnitsPicker}
+        itemStyle={styles.frequencyUnitPickerItem}
       >
         <Item label='days' value='days'/>
         <Item label='weeks' value='weeks'/>
@@ -184,15 +187,27 @@ class AddContactScreen extends Component {
   //TODO: Add Contact methods. Right now the method selector cannot update list so think of creative ways to address this!
   keepUpInfoForm = () => {
     return (
-      <View>
-        <Text>Stay in touch with...</Text>
-        <TextInput placeholder='name' onChangeText={this.onChangeName}/>
-        <Text>Last contacted on {this.state.lastContacted.format("MMMM Do, YYYY")} </Text>
-        <this.lastContactedDatePicker/>
-        <Button title={this.state.changeDate ? 'Confirm Date' : 'Change Date'} onPress={this.onChangeDate}/>
-        <Text>Get in touch every </Text>
-        <TextInput placeholder='1' onChangeText={this.onChangeContactFrequency}/>
-        <this.contactFrequencyUnitsPicker/>
+      <View style={styles.form}>
+        <View style={styles.promptAndInput}>
+          <Text style={styles.promptText}>Stay in touch with </Text>
+          <View style={styles.promptTextOutline}>
+            <TextInput style={styles.textInput} placeholder='name' onChangeText={this.onChangeName}/>
+          </View>
+        </View>
+
+        <View>
+          <Text style={styles.promptText}>Last contacted on {this.state.lastContacted.format("MMMM Do, YYYY")} </Text>
+          <this.lastContactedDatePicker/>
+          <Button title={this.state.changeDate ? 'Confirm Date' : 'Change Date'} onPress={this.onChangeDate}/>
+        </View>
+
+        <View style={styles.promptAndInput}>
+          <Text style={styles.promptText}>Get in touch every </Text>
+          <View style={styles.promptTextOutline}>
+            <TextInput style={styles.textInput} placeholder='1' onChangeText={this.onChangeContactFrequency}/>
+          </View>
+          <this.contactFrequencyUnitsPicker/>
+        </View>
       </View>
     );
   }
@@ -202,10 +217,12 @@ class AddContactScreen extends Component {
     return (
       <View style={appStyles.container}>
         <this.keepUpInfoForm/>
-        <Button
-          onPress={this.onAddContact}
-          title='Keep Up!'
-        />
+        <View style={styles.submitContactButtonWrapper}>
+          <Button
+            onPress={this.onAddContact}
+            title='Keep Up!'
+          />
+        </View>
       </View>
     );
   }

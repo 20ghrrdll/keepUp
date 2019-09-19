@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 
 import ContactListItem from '../ContactListItem';
+import styles from './styles.js';
 
 
 class ContactList extends Component {
@@ -67,7 +68,7 @@ class ContactList extends Component {
 
   renderSectionTitle(title){
     return (
-      <Text>{title}</Text>
+      <Text style={styles.sectionTitle}>{title}</Text>
     );
   }
   
@@ -89,6 +90,7 @@ class ContactList extends Component {
           renderItem={ ({ item, index }) => <ContactListItem name={item.name} lastContacted={item.lastContacted} listIndex={index}/>}
           renderSectionHeader={({ section: { title } }) => this.renderSectionTitle(title)}
           keyExtractor={this.keyExtractor}
+          style={styles.contactList}
         />
       </View>
     );
