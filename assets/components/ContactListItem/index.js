@@ -7,7 +7,7 @@ import Swipeable from 'react-native-gesture-handler/Swipeable';
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { RectButton } from 'react-native-gesture-handler';
 
-import { deleteContact } from '../../actions.js'
+import { checkOffContact, deleteContact } from '../../actions.js'
 import styles from './styles';
 
 class ContactListItem extends Component {
@@ -18,11 +18,16 @@ class ContactListItem extends Component {
     this._swipeableRow = ref;
   };
 
-  close = () => this._swipeableRow.close;
+  close = () => this._swipeableRow.close();
 
   onDelete = () => {
     this.close();
     this.props.deleteContact(this.props.contactInfo.contactKey);
+  }
+
+  onCheckOff = () => {
+    this.close();
+    this.props.checkOffContact(this.props.contactInfo.contactKey);
   }
 
   formatContactFrequencyStr = () => {
@@ -56,6 +61,26 @@ class ContactListItem extends Component {
     );
   };
 
+  renderCheckOffAction = (progress, dragX) => {
+    const trans = dragX.interpolate({
+      inputRange: [0, 50, 100, 101],
+      outputRange: [-20, 0, 0, 1],
+    });
+    return (
+      <RectButton style={styles.checkOffAction} onPress={this.onCheckOff}>
+        <Animated.Text
+          style={[
+            styles.actionText,
+            {
+              transform: [{ translateX: trans }],
+            },
+          ]}>
+          Contacted!
+        </Animated.Text>
+      </RectButton>
+    );
+  };
+
 
   render() {
     const { name, lastContacted, } = this.props.contactInfo
@@ -64,8 +89,11 @@ class ContactListItem extends Component {
       ref={this.rowRef}
       friction={2}
       leftThreshold={30}
+      rightThreshold={30}
       renderLeftActions={this.renderDeleteAction}
+      renderRightActions={this.renderCheckOffAction}
       onSwipeableLeftOpen={this.onDelete}
+      onSwipeableRightOpen={this.onCheckOff}
       >
         <View style={ styles.contactContainer }>
           <View>
@@ -84,6 +112,7 @@ class ContactListItem extends Component {
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
     deleteContact,
+    checkOffContact,
   }, dispatch)
 );
 

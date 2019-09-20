@@ -14,12 +14,21 @@ const connectionsReducer = (state = INITIAL_STATE, action) => {
       const newContactKey = newContact.name + newContact.lastContacted.format();
       const updatedContacts = new Map(state.allContacts);
       updatedContacts.set(newContactKey, newContact)
-      return {...state, allContacts: updatedContacts};
+      return { allContacts: updatedContacts };
 
     case 'DELETE_CONTACT':
-      const truncatedContacts = new Map(state.allContacts)
-      truncatedContacts.delete(action.payload)
-      return {...state, allContacts: truncatedContacts}
+      const truncatedContacts = new Map(state.allContacts);
+      truncatedContacts.delete(action.payload);
+      return { allContacts: truncatedContacts };
+
+    case 'CHECK_OFF_CONTACT':
+      const contactsWithCheckOff = new Map(state.allContacts);
+      let checkedOffContact = contactsWithCheckOff.get(action.payload);
+      if (checkedOffContact) {
+        checkedOffContact.lastContacted = new moment();
+        contactsWithCheckOff.set(action.payload, checkedOffContact)
+      }
+      return { allContacts: contactsWithCheckOff };
     default:
       return state
   }

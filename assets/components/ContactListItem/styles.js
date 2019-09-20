@@ -1,5 +1,11 @@
 import { StyleSheet } from 'react-native';
-import { SPACE_UNIT, CONTACT_ITEM_COLOR, DELETE_COLOR, ACTION_BUTTON_TEXT_COLOR } from '../../constants'
+import { 
+  SPACE_UNIT, 
+  CONTACT_ITEM_COLOR, 
+  DELETE_COLOR, 
+  ACTION_BUTTON_TEXT_COLOR, 
+  ACTION_BUTTON_COLOR,
+ } from '../../constants'
 
 
 export default styles = StyleSheet.create({ 
@@ -21,6 +27,14 @@ export default styles = StyleSheet.create({
     flex: 1,
     backgroundColor: DELETE_COLOR,
     justifyContent: 'center',
+    marginBottom: SPACE_UNIT,
+  },
+
+  checkOffAction: {
+    flex: 1,
+    backgroundColor: ACTION_BUTTON_COLOR,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
     marginBottom: SPACE_UNIT,
   },
 
