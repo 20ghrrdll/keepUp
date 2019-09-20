@@ -11,7 +11,7 @@ const connectionsReducer = (state = INITIAL_STATE, action) => {
     case 'ADD_CONTACT':
       const updatedContacts = state.allContacts.slice();
       updatedContacts.push(action.payload)
-      return {...state, allContacts: updated};
+      return {...state, allContacts: updatedContacts};
 
     case 'DELETE_CONTACT':
       const { allContacts } = state
