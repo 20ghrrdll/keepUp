@@ -59,7 +59,7 @@ class AddContactScreen extends Component {
     this.props.navigation.navigate('Home')
   };
 
-  updateContactSearch = contactSearch => {
+  updateContactSearch = async (contactSearch) => {
     this.setState({contactSearch});
   }
 
@@ -102,7 +102,7 @@ class AddContactScreen extends Component {
     return (
       <View>
         <SearchBar
-          placeholder="Search your contacts"
+          placeholder="Search your contacts by name"
           onChangeText={this.updateContactSearch}
           value={this.state.contactSearch}
           lightTheme={true}
