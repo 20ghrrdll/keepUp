@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { 
-  Button, 
   Text, 
   View, 
   DatePickerIOS,
@@ -12,7 +11,7 @@ import {
   FlatList,
   AsyncStorage
 } from 'react-native';
-import { SearchBar } from 'react-native-elements';
+import { SearchBar, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -142,7 +141,7 @@ class AddContactScreen extends Component {
 
   lastContactedInput = () => {
     return (
-      <View style={styles.lastContactedWrapper}>
+      <View>
           <View style={styles.promptAndInput}>
             <Text style={styles.promptText}>Last contacted on</Text>
             <TouchableOpacity style={styles.actionableDate} onPress={this.onChangeDate}>
@@ -151,7 +150,12 @@ class AddContactScreen extends Component {
           </View>
           <this.lastContactedDatePicker/>
           { this.state.changeDate &&
-            <Button title='Confirm Date' onPress={this.onConfirmDate}/>
+            <Button 
+              title='Confirm Date' 
+              type='clear'
+              titleStyle={styles.confirmDateButton}
+              onPress={this.onConfirmDate}
+            />
           }
         </View>
     );
@@ -244,7 +248,6 @@ class AddContactScreen extends Component {
       <View style={styles.form}>
        
         <this.nameInput/>
-
         <this.lastContactedInput/>
         <this.contactFrequencyInput/>
         
@@ -260,6 +263,7 @@ class AddContactScreen extends Component {
         <View style={styles.submitContactButtonWrapper}>
           <Button
             onPress={this.onAddContact}
+            buttonStyle={styles.submitContactButton}
             title='Keep Up!'
           />
         </View>

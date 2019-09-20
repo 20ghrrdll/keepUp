@@ -3,13 +3,19 @@ import { SPACE_UNIT, INACTIVE_COLOR, ACTION_BUTTON_COLOR } from '../../constants
 
 export default StyleSheet.create({
   form: {
-    margin: SPACE_UNIT,
+    marginLeft: SPACE_UNIT,
+    marginRight: SPACE_UNIT,
+    marginTop: SPACE_UNIT * 3,
+    marginBottom: SPACE_UNIT * 3,
+    flexDirection: 'column',
+    alignItems: 'center',
   },
 
   promptAndInput: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',
+    justifyContent: 'center',
     marginBottom: SPACE_UNIT * 2,
   },
 
@@ -37,12 +43,20 @@ export default StyleSheet.create({
     borderBottomWidth: 1,
   },
 
-  lastContactedWrapper: {
-    flexDirection: 'column',
+  confirmDateButton: {
+    color: ACTION_BUTTON_COLOR,
   },
+
+
 
   submitContactButtonWrapper: {
     flex: 1,
+    marginLeft: SPACE_UNIT,
+    marginRight: SPACE_UNIT
+  },
+
+  submitContactButton: {
+    backgroundColor: ACTION_BUTTON_COLOR,
   },
 
   contactFrequencyUnitsPicker: {
