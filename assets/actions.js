@@ -6,7 +6,6 @@ export const addContact = contact => {
 }
 
 export const deleteContact = contactKey => {
-  console.log('deleting', contactKey)
   return {
     type: 'DELETE_CONTACT',
     payload: contactKey,
