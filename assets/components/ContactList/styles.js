@@ -10,6 +10,6 @@ export default StyleSheet.create({
   },
 
   contactList: {
-    marginBottom: SPACE_UNIT * 5,
+    marginBottom: SPACE_UNIT * 11,
   }
 });

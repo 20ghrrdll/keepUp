@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { SPACE_UNIT, CONTACT_ITEM_COLOR } from '../../constants'
+import { SPACE_UNIT, CONTACT_ITEM_COLOR, DELETE_COLOR, ACTION_BUTTON_TEXT_COLOR } from '../../constants'
 
 
 export default styles = StyleSheet.create({ 
@@ -12,6 +12,25 @@ export default styles = StyleSheet.create({
     backgroundColor: CONTACT_ITEM_COLOR,
     marginBottom: SPACE_UNIT,
     padding: SPACE_UNIT,
-    flex: 1
-  }
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
+  deleteAction: {
+    flex: 1,
+    backgroundColor: DELETE_COLOR,
+    justifyContent: 'center',
+    marginBottom: SPACE_UNIT,
+  },
+
+  actionText: {
+    color: ACTION_BUTTON_TEXT_COLOR,
+    backgroundColor: 'transparent',
+    fontWeight: 'bold',
+  },
+
+  frequencyTag: {
+    paddingRight: SPACE_UNIT,
+  },
 })
