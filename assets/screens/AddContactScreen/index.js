@@ -8,6 +8,7 @@ import {
   Picker, 
   Platform,
   TextInput,
+  TouchableOpacity,
   FlatList,
   AsyncStorage
 } from 'react-native';
@@ -60,7 +61,7 @@ class AddContactScreen extends Component {
     this.setState({contactSearch});
   }
 
-  onChangeName = name => this.setState({name})
+  onChangeName = name => this.setState({name});
 
   setLastContacted = lastContacted => {
     lastContacted = moment(lastContacted)
@@ -68,8 +69,7 @@ class AddContactScreen extends Component {
   }
   
   onChangeDate = async () => {
-    const { changeDate } = this.state;
-    this.setState({changeDate: !changeDate});
+    this.setState({changeDate: true});
     if(Platform.OS === 'android') {
       try {
         const {action, year, month, day} = await DatePickerAndroid.open({
@@ -83,6 +83,10 @@ class AddContactScreen extends Component {
         console.warn('Cannot open date picker', message);
       }
     }
+  }
+
+  onConfirmDate = () => {
+    this.setState({changeDate: false});
   }
 
   onChangeContactFrequency = contactFrequency => this.setState({contactFrequency})
@@ -104,6 +108,22 @@ class AddContactScreen extends Component {
     );
   }
 
+  nameInput = () => {
+    return (
+      <View style={styles.promptAndInput}>
+      <Text style={styles.promptText}>Stay connected with </Text>
+      <View style={styles.promptTextOutline}>
+        <TextInput 
+          style={styles.textInput} 
+          placeholder='name' 
+          placeholderTextColor='#BFC0C0'
+          onChangeText={this.onChangeName}
+          />
+      </View>
+    </View>
+    );
+  }
+
   lastContactedDatePicker = () => {
     const isIOS = Platform.OS === 'ios';
     const { changeDate } = this.state;
@@ -120,6 +140,23 @@ class AddContactScreen extends Component {
     )
   }
 
+  lastContactedInput = () => {
+    return (
+      <View style={styles.lastContactedWrapper}>
+          <View style={styles.promptAndInput}>
+            <Text style={styles.promptText}>Last contacted on</Text>
+            <TouchableOpacity style={styles.actionableDate} onPress={this.onChangeDate}>
+              <Text style={styles.promptText}>{this.state.lastContacted.format("MMMM Do, YYYY")} </Text>
+            </TouchableOpacity>
+          </View>
+          <this.lastContactedDatePicker/>
+          { this.state.changeDate &&
+            <Button title='Confirm Date' onPress={this.onConfirmDate}/>
+          }
+        </View>
+    );
+  }
+
   contactFrequencyUnitsPicker = () => {
     const {Item} = Picker
     return (
@@ -134,6 +171,23 @@ class AddContactScreen extends Component {
         <Item label='months' value='months'/>
         <Item label='years' value='years'/>
       </Picker>
+    );
+  }
+
+  contactFrequencyInput = () => {
+    return (
+      <View style={styles.promptAndInput}>
+          <Text style={styles.promptText}>Get in touch every </Text>
+          <View style={styles.promptTextOutline}>
+            <TextInput 
+              style={styles.textInput} 
+              placeholder='1'
+              placeholderTextColor='#BFC0C0'
+              onChangeText={this.onChangeContactFrequency}
+            />
+          </View>
+          <this.contactFrequencyUnitsPicker/>
+        </View>
     );
   }
 
@@ -188,26 +242,12 @@ class AddContactScreen extends Component {
   keepUpInfoForm = () => {
     return (
       <View style={styles.form}>
-        <View style={styles.promptAndInput}>
-          <Text style={styles.promptText}>Stay in touch with </Text>
-          <View style={styles.promptTextOutline}>
-            <TextInput style={styles.textInput} placeholder='name' onChangeText={this.onChangeName}/>
-          </View>
-        </View>
+       
+        <this.nameInput/>
 
-        <View>
-          <Text style={styles.promptText}>Last contacted on {this.state.lastContacted.format("MMMM Do, YYYY")} </Text>
-          <this.lastContactedDatePicker/>
-          <Button title={this.state.changeDate ? 'Confirm Date' : 'Change Date'} onPress={this.onChangeDate}/>
-        </View>
-
-        <View style={styles.promptAndInput}>
-          <Text style={styles.promptText}>Get in touch every </Text>
-          <View style={styles.promptTextOutline}>
-            <TextInput style={styles.textInput} placeholder='1' onChangeText={this.onChangeContactFrequency}/>
-          </View>
-          <this.contactFrequencyUnitsPicker/>
-        </View>
+        <this.lastContactedInput/>
+        <this.contactFrequencyInput/>
+        
       </View>
     );
   }

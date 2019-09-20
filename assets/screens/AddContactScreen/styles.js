@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { SPACE_UNIT, INACTIVE_COLOR } from '../../constants.js'
+import { SPACE_UNIT, INACTIVE_COLOR, ACTION_BUTTON_COLOR } from '../../constants.js'
 
 export default StyleSheet.create({
   form: {
@@ -10,6 +10,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',
+    marginBottom: SPACE_UNIT * 2,
   },
 
   promptTextOutline: {
@@ -19,15 +20,25 @@ export default StyleSheet.create({
   },
 
   promptText: {
-    paddingTop: 3,
     height: SPACE_UNIT * 3,
     fontSize: SPACE_UNIT * 2,
     minWidth: SPACE_UNIT * 2,
     
   },
   textInput: {
-    height: SPACE_UNIT * 3,
+    height: 24,
     fontSize: SPACE_UNIT * 2,
+  },
+
+  actionableDate: {
+    fontSize: SPACE_UNIT * 2,
+    marginLeft: 4,
+    borderBottomColor: INACTIVE_COLOR,
+    borderBottomWidth: 1,
+  },
+
+  lastContactedWrapper: {
+    flexDirection: 'column',
   },
 
   submitContactButtonWrapper: {
