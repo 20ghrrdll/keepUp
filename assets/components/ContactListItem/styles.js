@@ -11,6 +11,7 @@ import {
 export default styles = StyleSheet.create({ 
   name: {
     fontWeight: 'bold',
+    fontSize: 16,
   },
 
   contactContainer: {

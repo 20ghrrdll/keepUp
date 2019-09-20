@@ -14,6 +14,7 @@ import {
 import { SearchBar, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import moment from "moment";
 import update from 'immutability-helper';
@@ -259,14 +260,14 @@ class AddContactScreen extends Component {
     // add back in <this.searchForContact/> once contact methods are ironed out :)
     return (
       <View style={appStyles.container}>
-        <this.keepUpInfoForm/>
-        <View style={styles.submitContactButtonWrapper}>
-          <Button
-            onPress={this.onAddContact}
-            buttonStyle={styles.submitContactButton}
-            title='Keep Up!'
-          />
-        </View>
+          <this.keepUpInfoForm/>
+          <View style={styles.submitContactButtonWrapper}>
+            <Button
+              onPress={this.onAddContact}
+              buttonStyle={styles.submitContactButton}
+              title='Keep Up!'
+            />
+          </View>
       </View>
     );
   }

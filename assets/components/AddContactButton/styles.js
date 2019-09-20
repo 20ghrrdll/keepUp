@@ -11,8 +11,8 @@ export default styles = StyleSheet.create({
     backgroundColor: ACTION_BUTTON_COLOR,
     position: 'absolute',
     alignSelf: 'flex-end',
-    bottom: SPACE_UNIT * 3,
-    right: SPACE_UNIT,
+    bottom: SPACE_UNIT * 5,
+    right: SPACE_UNIT * 2,
   },
 
   plusIcon: {
