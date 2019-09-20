@@ -35,16 +35,16 @@ class ContactList extends Component {
     const { allContacts } = this.props;
     const today = moment();
 
-    allContacts.map(( contact ) => {
+    allContacts.forEach(( contact, contactKey ) => {
       const {lastContacted, contactFrequency, contactFrequencyUnits} = contact;
       let contactDeadline = lastContacted.clone();
   
       contactDeadline.add(contactFrequency, contactFrequencyUnits);
 
       if (today.isAfter(contactDeadline)) {
-        overdues.push(contact);
+        overdues.push({...contact, contactKey});
       } else {
-        warmConnects.push(contact);
+        warmConnects.push({...contact, contactKey});
       }
     })
 
@@ -54,7 +54,7 @@ class ContactList extends Component {
     this.setState({overdues, warmConnects});
   }
 
-  keyExtractor = (item, index) => item.name + String(index)
+  keyExtractor = (item, index) => item.contactKey
 
   componentDidMount(){
     this.determineOverdues();
@@ -87,7 +87,7 @@ class ContactList extends Component {
               data: this.state.warmConnects,
             },
           ]}
-          renderItem={ ({ item, index }) => <ContactListItem name={item.name} lastContacted={item.lastContacted} listIndex={index}/>}
+          renderItem={ ({ item }) => <ContactListItem name={item.name} lastContacted={item.lastContacted} contactKey={item.contactKey}/>}
           renderSectionHeader={({ section: { title } }) => this.renderSectionTitle(title)}
           keyExtractor={this.keyExtractor}
           style={styles.contactList}

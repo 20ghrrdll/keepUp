@@ -51,8 +51,8 @@ export default StyleSheet.create({
 
   submitContactButtonWrapper: {
     flex: 1,
-    marginLeft: SPACE_UNIT,
-    marginRight: SPACE_UNIT
+    marginLeft: SPACE_UNIT * 3,
+    marginRight: SPACE_UNIT * 3,
   },
 
   submitContactButton: {

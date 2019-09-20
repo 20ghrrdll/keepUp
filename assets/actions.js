@@ -5,9 +5,10 @@ export const addContact = contact => {
   };
 }
 
-export const deleteContact = contactIndex => {
+export const deleteContact = contactKey => {
+  console.log('deleting', contactKey)
   return {
     type: 'DELETE_CONTACT',
-    payload: contactIndex,
+    payload: contactKey,
   }
 }

@@ -7,7 +7,7 @@ import { deleteContact } from '../../actions.js'
 import styles from './styles';
 
 class ContactListItem extends Component {
-  onDelete = () => this.props.deleteContact(this.props.listIndex)
+  onDelete = () => this.props.deleteContact(this.props.contactKey)
   render() {
     const { name, lastContacted} = this.props
     return (
