@@ -18,7 +18,7 @@ class HomeScreen extends Component {
       <View style={appStyles.container}>
         <LinearGradient
           colors={[ '#fafcfa', '#9DE0C9']}
-          start={[0.1, 0.1]}
+          start={[0.1, 0.2]}
         >
           <Text style={appStyles.title}>KeepUp</Text>
           <ContactList/>

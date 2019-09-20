@@ -25,6 +25,13 @@ export default StyleSheet.create({
     borderBottomColor: INACTIVE_COLOR,
   },
 
+  searchPromptText: {
+    height: SPACE_UNIT * 3,
+    fontSize: SPACE_UNIT * 2,
+    minWidth: SPACE_UNIT * 2,
+    margin: SPACE_UNIT,
+  },
+
   promptText: {
     height: SPACE_UNIT * 3,
     fontSize: SPACE_UNIT * 2,

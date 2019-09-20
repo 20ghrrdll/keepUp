@@ -39,17 +39,19 @@ class AddContactScreen extends Component {
     changeDate: false,
     contactFrequency: 1,
     contactFrequencyUnits: 'weeks',
-    contactMethods: [{contactInfo: "", contactMedium: 'just-call'}]
+    phoneNumber: '',
+    contactId: null,
 
   };
 
   onAddContact = async() => {
-    const {name, lastContacted, contactFrequency, contactFrequencyUnits} = this.state
+    const {name, lastContacted, contactFrequency, contactFrequencyUnits, contactId, phoneNumber} = this.state
     const newContact = {
       name,
       lastContacted,
       contactFrequency: Number(contactFrequency),
-      contactFrequencyUnits
+      contactFrequencyUnits,
+      contactId,
     }
     
     this.props.addContact(newContact);
@@ -62,6 +64,8 @@ class AddContactScreen extends Component {
   }
 
   onChangeName = name => this.setState({name});
+  
+  onChangePhoneNumber = phoneNumber => this.setState({phoneNumber})
 
   setLastContacted = lastContacted => {
     lastContacted = moment(lastContacted)
@@ -97,9 +101,8 @@ class AddContactScreen extends Component {
   searchForContact = () => {
     return (
       <View>
-        <Text>Is this person already in your contacts?</Text>
         <SearchBar
-          placeholder="Search for them here!"
+          placeholder="Search your contacts"
           onChangeText={this.updateContactSearch}
           value={this.state.contactSearch}
           lightTheme={true}
@@ -196,52 +199,21 @@ class AddContactScreen extends Component {
     );
   }
 
-  /*
-  contactMediumPicker = (contactMedium, contactMethodIndex) => { 
-    const {Item} = Picker
+  phoneNumberInput = () => {
     return (
-      <Picker
-        selectedValue={this.state.contactMethods[contactMethodIndex].contactMedium}
-        onValueChange={(mediumValue, mediumIndex) => {
-          this.state.contactMethods[contactMethodIndex].contactMedium = mediumValue
-          this.forceUpdate()
-        }}
-      >
-        <Item label='just text' value='just-text'/>
-        <Item label='just call' value='just-call'/>
-        <Item label='text or call' value='text-or-call'/>
-        <Item label='email' value='email'/>
-      </Picker>
-
+      <View style={styles.promptAndInput}>
+      <Text style={styles.promptText}>By texting </Text>
+      <View style={styles.promptTextOutline}>
+        <TextInput 
+          style={styles.textInput} 
+          placeholder='(123) 456-7890' 
+          placeholderTextColor='#BFC0C0'
+          onChangeText={this.onChangePhoneNumber}
+          />
+      </View>
+    </View>
     );
   }
-  
-  contactMethod = ({item: { contactInfo, contactMedium }, index: contactMethodIndex }) => {
-    return (
-      <View>
-        <TextInput value={contactInfo ? contactInfo : "contact info"} onChange={info => {
-          const currentContactMethods = this.state.contactMethods;
-          currentContactMethods[contactMethodIndex].contactInfo = info
-          this.setState({contactMethods: currentContactMethods})
-        }}/>
-        {this.contactMediumPicker(contactMedium, contactMethodIndex)}
-      </View>
-    );
-  }
-
-  contactMethodList = () => {
-    const { contactMethods } = this.state;
-    return (
-      <View>
-        <Text>Reach out by...</Text>
-        <FlatList
-          data={contactMethods}
-          renderItem={this.contactMethod}
-          keyExtractor={(item, index) => item.contactInfo + String(index)}
-        />
-      </View>
-    );
-  }*/
 
   //TODO: Add Contact methods. Right now the method selector cannot update list so think of creative ways to address this!
   keepUpInfoForm = () => {
@@ -251,6 +223,7 @@ class AddContactScreen extends Component {
         <this.nameInput/>
         <this.lastContactedInput/>
         <this.contactFrequencyInput/>
+        <this.phoneNumberInput/>
         
       </View>
     );
@@ -260,6 +233,7 @@ class AddContactScreen extends Component {
     // add back in <this.searchForContact/> once contact methods are ironed out :)
     return (
       <View style={appStyles.container}>
+          <this.searchForContact/>
           <this.keepUpInfoForm/>
           <View style={styles.submitContactButtonWrapper}>
             <Button
