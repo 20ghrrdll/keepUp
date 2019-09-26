@@ -11,13 +11,15 @@ import {
   FlatList,
   AsyncStorage
 } from 'react-native';
-import { SearchBar, Button } from 'react-native-elements';
+import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import moment from "moment";
 import update from 'immutability-helper';
+
+import ContactsSearchBar from '../../components/ContactsSearchBar'
 
 import { addContact } from '../../actions.js'
 
@@ -97,19 +99,6 @@ class AddContactScreen extends Component {
 
   onChangeContactFrequencyUnits = (itemValue, itemIndex) =>
   this.setState({contactFrequencyUnits: itemValue})
-
-  searchForContact = () => {
-    return (
-      <View>
-        <SearchBar
-          placeholder="Search your contacts by name"
-          onChangeText={this.updateContactSearch}
-          value={this.state.contactSearch}
-          lightTheme={true}
-        />
-      </View>
-    );
-  }
 
   nameInput = () => {
     return (
@@ -233,7 +222,7 @@ class AddContactScreen extends Component {
     // add back in <this.searchForContact/> once contact methods are ironed out :)
     return (
       <View style={appStyles.container}>
-          <this.searchForContact/>
+          <ContactsSearchBar/>
           <this.keepUpInfoForm/>
           <View style={styles.submitContactButtonWrapper}>
             <Button

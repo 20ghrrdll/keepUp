@@ -10,6 +10,7 @@
   "dependencies": {
     "expo": "^34.0.1",
     "expo-cli": "^3.0.10",
+    "expo-contacts": "^7.0.0",
     "expo-linear-gradient": "^7.0.0",
     "immutability-helper": "^3.0.1",
     "moment": "^2.24.0",
